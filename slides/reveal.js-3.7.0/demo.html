@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Docker Overview</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Docker Overview</h1>
+					<h2>around technology and how it shapes your teams</h3>
+					<p>
+						<small>Giuseppe Virzì</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Who am I?</h2>
+					<p>
+						Giuseppe Virzì
+					</p>
+					<p>
+						Release/Reliability Engineer
+					</p>
+					<p><p><img height="400" data-src="./images/me.jpg"></p></p>
+				</section>
+
+				<section>
+					<h2>What will we talk about?</h2>
+					<ul>
+						<li>virtualization and containers</li>
+						<li>the Docker approach</li>
+						<li>containers4devs</li>
+						<li>Docker containers and images management</li>
+						<li>a quick look at how to containerize an application</li>
+						<li>Docker Volumes, Networking Basics</li>
+						<li>containers4sysadmins</li>
+						<li>Docker Compose</li>
+						<li>Docker Swarm</li>
+						<li>containers and the DevOps</li>
+					</ul>
+				</section>
+				<section>
+					<h2>What do we mean by Virtualization?</h2>
+					<blockquote cite="https://en.wikipedia.org/wiki/Virtualization">
+						&ldquo;The act of creating a virtual (rather than actual) version of something, including virtual computer hardware platforms, storage devices, and computer network resources.&rdquo;
+					</blockquote>
+				</section>
+				<section>
+					<h2>Virtualization examples</h2>
+					<ul>
+						<li>JVM - virtualize running environment for a single program</li>
+						<li>Hypervisors - virtualize a running environment for the whole OS</li>
+						<li>Containers - virtualize a running enviroment for a single process, sharing OS</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Are containers really about virtualization?</h2>
+					<ul>
+						<li>LESS virtualization</li>
+						<li>MORE isolation</li>
+						<li>MORE distribution</li>
+					</ul>
+				</section>
+				<section>
+					<h2>How do linux containers work?</h2>
+					<p>They use some features of the linux kernel (>=3.8):</p>
+					<ul style="font-size: 80%;">
+						<li>Namespaces</li>
+							<ul>
+								<li>mnt (mount points, filesystems)
+								<li>pid (processes)</li>
+								<li>net (network stack)</li>
+								<li>ipc (System V IPC)</li>
+								<li>uts (hostname)</li>
+								<li>user (UIDs)</li>
+								</li>
+							</ul>
+						<li>CGroups</li>
+						<li>UnionFS</li>
+					</ul>
+				</section>
+				<section>
+					<img height="650" width="950" data-src="./images//implementations.png">
+				</section>
+				<section>
+					<H2>Ok, now tell me about Docker</H2>
+					<ul style="font-size:75%;">
+						<li>A Company as well as Product</li> 
+						<li>Developed by DotCloud Inc. ( Currently Docker Inc.) </li>
+						<li>A Framework they built their PaaS upon.</li>
+						<li>Released it as open source 6+ years back</li>
+						<li>Cross-platform nature and friendliness towards System Admin and Developers 
+							<ul>
+								<li>Developers - concentrate on building applications and getting them running inside the containers</li>
+								<li>System Admins - work on running the containers in deployment.</li>
+							</ul>
+						</li>
+						<li>Possible to set up in any OS, be it Windows, OSX, Linux - It works the same way</li>
+						<li>Docker uses host OS kernel, there is no custom or additional kernel inside container. All containers runs on machine are sharing this "host" kernel.</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Paradigm shift</h2>
+					<ul>
+						<li class="fragment">From: It works on my computer</li>
+						<li class="fragment">To: It works on my container</li>
+					</ul>
+				</section>
+				<section>
+					<H2>Real Paradigm shift</H2>
+					<ul style="font-size:80%;">
+						<li>applications can be packaged with their dependencies in a virtual container.</li>
+						<li>applications can be distributed in images runnable on every supported platform </li>
+						<li>guaranteed to run the same way (Your development desktop, a bare-metal server, virtual machine, data center, or cloud) </li>
+						<li>less overhead compared to starting virtual machines is the promise</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Kernel Features Docker uses</h2>
+					<p><img height="550" data-src="./images//namespaces.png"></p>
+				</section>
+				<section>
+					<h2>Docker vs VMs</h2>
+					<p><img height="500" data-src="./images//dockervsvms.png"></p>
+				</section>
+				<section>
+						<h2>Docker vs VMs: Similarities</h2>
+						<p><img height="400" data-src="./images/similarities.png"></p>
+				</section>
+				<section>
+						<h2>Docker vs VMs: Differences</h2>
+						<p><img height="500" data-src="./images/differences.png"></p>
+				</section>
+				<section>
+						<h2>Docker is not a VM!</h2>
+						<p>So please do not try to install sshd in your containers.</p>
+						<small>Confusion around the possibility to install a distribution.</small>
+				</section>
+				<section>
+					<h2>What problems Docker solves?</h2>
+					<p align=left>Back in the days:</p>
+					<ul>
+						<li>software used to be monolithic</li>
+						<li>deployed on a single server</li>
+						<li>developed on a single software stack</li>
+						<li>Vertical scaling</li>
+					</ul>
+				</section>
+				<section>
+						<h2>What problems Docker solves?</h2>
+						<p align=left>Nowadays:</p>
+						<ul>
+							<li>software are continuously developed and deployed</li>
+							<li>deployed on a high number of servers</li>
+							<li>highly distributed, higly decoupled</li>
+							<li>developed using heterogeneus techologies</li>
+							<li>Horizontal scaling</li>
+						</ul>
+				</section>
+				<section>
+						<h2>What problems Docker solves?</h2>
+						<p>Modern apps are hard to ship and deploy because:</p>
+						<ul>
+							<li>servers may not be perfectly identical</li>
+							<li>Dev and Prod envs are different</li>
+							<li>as hard as trying to ship goods to customers.</li>
+						</ul>
+				</section>
+				<section>
+						<h2>What problems Docker solves?</h2>
+						<p>No surprise if we discover that</p>
+						<blockquote>
+							&ldquo;docker definition: 1. a person who works at a port, putting goods onto and taking them off ships.&rdquo;
+						</blockquote>
+				</section>
+				
+				<section>
+						<h2>What problems Docker solves?</h2>
+						<p><img height="400" data-src="./images//containers.jpg"></p>
+				</section>
+				<section>
+					<h2>Why Docker does it better?</h2>
+					<ul>
+						<li class="fragment">Native applications
+							<ul>
+								<li>less overhead</li>
+								<li>less portable</li>
+							</ul>
+						</li>
+						<li class="fragment">Virtual machines
+						
+							<ul>
+								<li>more overhead</li>
+								<li>more portable</li>
+							</ul>
+						</li>
+						<li class="fragment">Docker
+							<ul>
+								<li>Somewhere in the middle</li>
+							</ul>
+						</li>
+						</ul>
+					</ul>
+				</section>
+				<section>
+						<h2>Docker Block: components</h2>
+						<p><img height="500" data-src="./images//architecture.svg"></p>
+				</section>
+				<section>
+						<h2>Docker Architecture</h2>
+						<p><img height="550" data-src="./images/docker_architecture.jpg"></p>
+				</section>
+				<section>
+						<h2>Docker Container Lifecycle</h2>
+						<p><img height="530" data-src="./images/container_lifecycle.jpg"></p>
+				</section>
+				<section>
+					<h2>Docker Block: CLI</h2>
+					<pre>
+						<code class="hlsh" data-trim contenteditable>
+								docker build [options] . -t "app/container_name" # name
+						</code>
+					</pre>
+					<pre>
+						<code class="hlsh" data-trim contenteditable>
+								docker run hello-world
+						</code>
+					</pre>
+					<pre>
+						<code class="hlsh" data-trim contenteditable>
+								docker create --name app_redis_1 --expose 6379 redis:3.0.2
+						</code>
+					</pre>
+					<pre>
+						<code class="hlsh" data-trim contenteditable>
+								docker exec app_web_1 tail logs/development.log
+								docker exec -t -i app_web_1 rails c
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Docker Block: CLI</h2>
+					<pre>
+						<code class="hlsh" data-trim contenteditable>
+								docker ps 
+								docker ps -a
+						</code>
+					</pre>
+					<pre>
+						<code class="hlsh" data-trim contenteditable>
+								docker images
+						</code>
+					</pre>
+					<pre>
+						<code class="hlsh" data-trim contenteditable>
+								docker rm
+								docker rmi
+						</code>
+					</pre>
+				</section>
+				<section>
+						<h2>Docker Block: Daemon</h2>
+						<ul>
+							<li>dockerd is the persistent process that manages containers</li>
+							<li>It listens on a unix socket /var/run/docker.sock </li>
+							<li>or on the tcp port tcp://127.0.0.1:2375 (or 2376 if SSL)</li>
+						</ul>
+				</section>
+				<section>
+						<h2>Docker Block: Daemon</h2>
+						<p><img height="400" data-src="./images/daemon_architecture.png"></p>
+				</section>
+				<section>
+						<h2>Docker Block: Containerd</h2>
+						<blockquote>
+							&ldquo;It provides a client layer of types that platforms can build on top of without ever having to drop down to the kernel level.&rdquo;
+						</blockquote>
+				</section>
+				<section>
+						<h2>Docker Block: DockerHub</h2>
+						<h3><a href="http://hub.docker.com/">http://hub.docker.com/</a></h3>
+						<p>Docker Hub is a service provided by Docker for finding and sharing container images with your team. It provides the following major features:</p>
+				</section>
+				<section>
+						<h2>Docker Block: DockerHub</h2>
+						<ul style="font-size:70%">
+							<li>Repositories: Push and pull container images.</li>
+							<li>Teams & Organizations: Manage access to private repositories of container images.</li>
+							<li>Official Images: Pull and use high-quality container images provided by Docker.</li>
+							<li>Publisher Images: Pull and use high-quality container images provided by external vendors. Certified images also include support and guarantee compatibility with Docker Enterprise.</li>
+    						<li>Builds: Automatically build container images from GitHub and Bitbucket and push them to Docker Hub</li>
+    						<li>Webhooks: Trigger actions after a successful push to a repository to integrate Docker Hub with other services.</li>
+						</ul>
+				</section>
+				<section>
+					<h2>Docker Block: Image Storage</h2>
+					<pre>
+						<code class="hldocker" data-trim contenteditable>
+							FROM ubuntu:15.04
+							COPY . /app
+							RUN make /app
+							CMD python /app/app.py
+						</code>
+					</pre>
+				</section>
+				<section>
+						<h2>Docker Block: Image Storage</h2>
+						<img height="400" data-src="./images/container-layers.jpg">
+				</section>
+				<section>
+						<h2>Docker Block: Container Storage</h2>
+						<img height="400" data-src="./images/sharing-layers.jpg">
+				</section>
+				<section>
+						<h2>Docker Block: Volumes</h2>
+						<img height="400" data-src="./images/types-of-mounts.png">
+				</section>
+				<section>
+						<h2>Docker Block: Volumes</h2>
+						<ul>
+							<li>The copy-on-write (CoW) strategy</li>
+							<li>Layers sharing</li>
+							<li>Better push/pull performances</li>
+						</ul>
+				</section>
+				
+				<section>
+						<h2>Docker Components: Network</h2>
+						<p></p>
+						<ul style="font-size:70%">
+							<li><b>User-defined bridge networks</b> are best when you need multiple containers to communicate on the same Docker host.</li>
+							<li><b>Host networks</b> are best when the network stack should not be isolated from the Docker host, but you want other aspects of the container to be isolated.</li>
+							<li><b>Overlay networks</b> are best when you need containers running on different Docker hosts to communicate, or when multiple applications work together using swarm services.</li>
+							<li><b>Macvlan networks</b> are best when you are migrating from a VM setup or need your containers to look like physical hosts on your network, each with a unique MAC address.</li>
+						</ul>
+				</section>
+				<section>
+						<h3>DEMO I</h3>
+						<pre>
+							<code class="hlbash" data-trim contenteditable>
+							docker --version
+							docker system info
+							docker run hello-world
+							docker images
+							docker ps [-a]
+							docker run -d -p 9999:80 -v $(pwd):/var/www/html nginx
+							docker inspect xxxx
+							docker top xxxx
+							docker logs -f xxxx
+							docker kill
+							</code>
+						</pre>
+				</section>
+				<section>
+						<h2>Building Images</h2>
+						<a href="https://github.com/gothinkster/hapijs-realworld-example-app">gothinkster/hapijs-realworld-example-app</a>
+				</section>
+				<section>
+					<h2>Building Images: Dockerfile</h2>
+					<pre>
+						<code class="hldocker" data-trim contenteditable>
+						FROM node:6-alpine
+
+						RUN mkdir -p /usr/src/app
+						WORKDIR /usr/src/app
+
+						COPY package.json /usr/src/app/
+						RUN npm install && npm cache clean
+						COPY . /usr/src/app
+
+						EXPOSE 8080
+
+						CMD [ "npm", "start" ]
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Building Images: Compose</h2>
+					<pre>
+						<code class="hldocker" data-trim contenteditable>
+								version: '3.2'
+								services:
+								  conduit_api:
+									build: .
+									image: conduit_api:1.0.0
+									depends_on:
+									  - mongo
+									environment:
+									  PORT: '8080'
+									  NODE_ENV: 'production'
+									  MONGO_DB_URI: 'mongodb://mongo:27017/conduit'
+									healthcheck:
+									  test: ["CMD", "curl", "-f", "http://localhost:8080/api/status"]
+									  interval: 10m
+									  timeout: 10s
+									  retries: 3
+									ports: 
+									  - 8080:8080
+									restart: on-failure
+								  mongo:
+									image: mongo:latest
+									expose:
+									  - 27017
+									restart: on-failure
+									volumes:
+									  - data:/data/db
+									
+								volumes:
+								data:
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Docker Swarm</h2>
+					<ul>
+						<li>Cluster management integrated with Docker Engine</li>
+						<li>Decentralized design</li>
+						<li>Declarative service model</li>
+						<li>Scaling</li>
+						<li>Self Healing</li>
+						<li>Overlay networks</li>
+						<li>Service discovery (embedded DNS)</li>
+						<li>Load balancing</li>
+						<li>SSL certs used for inter-node communication</li>
+						<li>Rolling updates</li>
+					</ul>
+				</section>
+				<section>
+						<h3>DEMO II</h3>
+						<pre>
+							<code class="hlbash" data-trim contenteditable>
+							docker build
+							docker-compose build
+							docker-compose up
+							docker service 
+							docker stack deploy -c docker-compose.yml demostack
+							docker service logs demostack_... 2>&1
+							</code>
+						</pre>
+				</section>
+				<section>
+						<h2>Docker Mission</h2>
+						<img height="400" data-src="./images/docker_caas_workflow.jpg">
+				</section>
+				<section>
+						<img height="100%" data-src="./images/end.jpg">
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

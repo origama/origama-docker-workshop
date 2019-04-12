@@ -44,19 +44,3 @@ docker run --rm -it hello-world
 ```
 docker run --rm -it hello-world
 ```
-
-* what is visible inside a container? We start from scratch (empty) adding only what we need, or we can add a full distro filesystem or we can mount specific parts of the filesystem in the overlay
-
-* difference between a short-running process and a long running process
-Short running:
-```
-docker run --rm busybox uname -a
-```
-Long running
-* how to get logs from a running container
-
-* twelve factors overview
-
-```
-docker 
-```

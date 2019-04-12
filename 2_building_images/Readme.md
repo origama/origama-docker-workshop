@@ -1,4 +1,4 @@
-#Build an image
+# Build an image
 
 ## The program
 Let's imagine we have a "complex" program to be run in the container like the following:
@@ -11,3 +11,5 @@ int main(void) {
     return 0;
 }
 ```
+
+We'll walk through the examples in subfolders

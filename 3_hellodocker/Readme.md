@@ -36,7 +36,7 @@ docker run --rm -it busybox uname -a
 * how environment variables are used inside the container
 
 ```
-docker run --rm -it hello-world
+docker run --rm -e NAME=origama ubuntu bash -c 'echo $NAME'
 ```
 
 * how to run in readonly mode

@@ -50,7 +50,7 @@ services:
         printf "\\n"
 
         printf "Running runner...\\n"
-        gitlab-runner run --user=gitlab-runner --working-directory=/home/gitlab-runner --metrics-server=:9252
+        gitlab-runner run --user=gitlab-runner --working-directory=/home/gitlab-runner
       '
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -105,7 +105,7 @@ services:
         printf "\\n"
 
         printf "Running runner...\\n"
-        gitlab-runner run --user=gitlab-runner --working-directory=/home/gitlab-runner --metrics-server=:9252
+        gitlab-runner run --user=gitlab-runner --working-directory=/home/gitlab-runner
       '
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
